@@ -1,0 +1,40 @@
+#后台运营java 程序 写入到abc.text文件中
+nohup  java -jar XX.jar >temp.text &
+
+#springboot 关闭命令
+1.Spring Boot应用关闭的前提条件是POM.xml添加以下内容：
+<dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-actuator</artifactId>
+</dependency>
+2.application.properties中添加：
+#启用shutdown
+endpoints.shutdown.enabled=true
+#禁用密码验证
+endpoints.shutdown.sensitive=false
+关闭命令为
+curl -X POST host:port/shutdown
+
+如果要配置路径，需要在application.properties中添加management.context-path=/manage，则关闭命令变为curl -X POST host:port/manage/shutdown
+
+3.关闭安全验证
+3.1如果在关闭时需要安全验证，则在pom.xml文件中添加：
+<dependency>
+     <groupId>org.springframework.boot</groupId>
+     <artifactId>spring-boot-starter-security</artifactId>
+</dependency>
+3.2application.properties中添加：
+#开启shutdown的安全验证
+endpoints.shutdown.sensitive=true
+#验证用户名
+security.user.name=admin
+#验证密码
+security.user.password=admin
+#角色
+management.security.role=SUPERUSER
+# 指定端口
+management.port=8081
+# 指定地址
+management.address=127.0.0.1
+关闭命令为：
+curl -u admin:admin -X POST http://127.0.0.1:8081/manage/shutdown
