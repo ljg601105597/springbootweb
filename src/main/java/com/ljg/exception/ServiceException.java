@@ -6,9 +6,9 @@ package com.ljg.exception;
  * @author
  * @create 2017-05-16 12:12
  **/
-public class SinoException extends Exception {
+public class ServiceException extends Exception {
 
-    public SinoException(String message) {
+    public ServiceException(String message) {
         super(message);
     }
 }

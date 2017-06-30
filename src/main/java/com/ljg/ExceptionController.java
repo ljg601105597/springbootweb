@@ -1,7 +1,7 @@
 package com.ljg;
 
 
-import com.ljg.exception.SinoException;
+import com.ljg.exception.ServiceException;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -23,10 +23,10 @@ public class ExceptionController {
      * @param ex
      * @return
      */
-    @ExceptionHandler(SinoException.class)
+    @ExceptionHandler(ServiceException.class)
     @ResponseStatus(HttpStatus.OK)
     @ResponseBody
-    public String serviceExceptionHandler(HttpServletRequest request, SinoException ex) {
+    public String serviceExceptionHandler(HttpServletRequest request, ServiceException ex) {
         return "SinoException";
     }
 
